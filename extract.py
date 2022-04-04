@@ -25,7 +25,27 @@ def load_neos(neo_csv_path):
     :return: A collection of `NearEarthObject`s.
     """
     # TODO: Load NEO data from the given CSV file.
-    return ()
+    List_NEO =[]
+    with open(neo_csv_path,'r') as f:
+        Reader =csv.DictReader(f)
+        #line_count=0
+        #next(Reader)
+        for row in Reader:
+            NearEarthObject.designation = row['pdes']
+            List_NEO.append(NearEarthObject.designation)
+            NearEarthObject.name = row['name']
+            List_NEO.append(NearEarthObject.name)
+            NearEarthObject.diameter = row['diameter']
+            List_NEO.append(NearEarthObject.diameter)
+            NearEarthObject.hazardous = row['pha']
+            List_NEO.append(NearEarthObject.hazardous)
+            
+            #neo =NearEarthObject(designation =row['pdes'],name = row['name'],diameter=row['diameter'],hazardous=row['hazardous'])
+            #List_NEO.append(neo)
+            
+            
+    return List_NEO
+   
 
 
 def load_approaches(cad_json_path):
@@ -35,4 +55,20 @@ def load_approaches(cad_json_path):
     :return: A collection of `CloseApproach`es.
     """
     # TODO: Load close approach data from the given JSON file.
-    return ()
+    list_ca=[]
+    with open(cad_json_path , 'r') as f:
+        json_reader=json.load(f)
+        
+        for row in json_reader['data']:
+            CloseApproach.designation = str(row[0])
+            list_ca.append(CloseApproach.designation)
+            CloseApproach.time= row[3]
+            list_ca.append(CloseApproach.time)
+            CloseApproach.distance=float(row[4])
+            list_ca.append(CloseApproach.distance)
+            CloseApproach.velocity=float(row[7])
+            list_ca.append(CloseApproach.velocity)
+            
+    
+    return list_ca
+    
