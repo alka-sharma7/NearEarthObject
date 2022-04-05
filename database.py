@@ -48,12 +48,16 @@ class NEODatabase:
         # TODO: What additional auxiliary data structures will be useful?
 
         # TODO: Link together the NEOs and their close approaches.
-        for approach in self._approaches:  
-            neo = _neos_by_designation[approach.designation] # retrieve neo through designation in the dictionary
-            # set approach.neo to neo
-            approach.neo=neo
-            # append approach to neo.approaches
-            neo.approaches.append(approach)
+         
+        for neo1 in neos:
+                self.neos_by_designation[neo1.designation] = neo
+                if neo.name:
+                    self.neos_by_name[neo.name] = neo
+                    
+        for approach in approaches:
+                neo = self.get_neo_by_designation(approach.designation)
+                neo.approaches.append(neo)     
+            
 
 
     def get_neo_by_designation(self, designation):
@@ -70,10 +74,10 @@ class NEODatabase:
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
         # TODO: Fetch an NEO by its primary designation.
-        if str(self.designation) in list(self._neos_by_designation.keys()):
-            return self._neos_by_designation[designation]
-        else:
-            return None
+        for neo in self._neos:
+            self._neo_by_designation[neo.designation] = neo
+            #if neo.name:
+                #self.neo_by_name[neo.name] = neo
 
     def get_neo_by_name(self, name):
         """Find and return an NEO by its name.
@@ -90,7 +94,12 @@ class NEODatabase:
         :return: The `NearEarthObject` with the desired name, or `None`.
         """
         # TODO: Fetch an NEO by its name.
-        return None
+        for neo in self._neos:
+            if neo.name == str(name.title()):
+                return neo
+            else:
+                continue
+        #return None
 
     def query(self, filters=()):
         """Query close approaches to generate those that match a collection of filters.
