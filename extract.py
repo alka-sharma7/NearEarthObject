@@ -31,17 +31,17 @@ def load_neos(neo_csv_path):
         #line_count=0
         #next(Reader)
         for row in Reader:
-            NearEarthObject.designation = row['pdes']
-            List_NEO.append(NearEarthObject.designation)
-            NearEarthObject.name = row['name']
-            List_NEO.append(NearEarthObject.name)
-            NearEarthObject.diameter = row['diameter']
-            List_NEO.append(NearEarthObject.diameter)
-            NearEarthObject.hazardous = row['pha']
-            List_NEO.append(NearEarthObject.hazardous)
+            #NearEarthObject.designation = row['pdes']
+            #List_NEO.append(NearEarthObject.designation)
+            #NearEarthObject.name = row['name']
+            #List_NEO.append(NearEarthObject.name)
+            #NearEarthObject.diameter = row['diameter']
+            #List_NEO.append(NearEarthObject.diameter)
+            #NearEarthObject.hazardous = row['pha']
+            #List_NEO.append(NearEarthObject.hazardous)
             
-            #neo =NearEarthObject(designation =row['pdes'],name = row['name'],diameter=row['diameter'],hazardous=row['hazardous'])
-            #List_NEO.append(neo)
+            neo =NearEarthObject(designation =row['pdes'],name = row['name'],diameter=row['diameter'],hazardous=row['pha'])
+            List_NEO.append(neo)
             
             
     return List_NEO
@@ -60,15 +60,17 @@ def load_approaches(cad_json_path):
         json_reader=json.load(f)
         
         for row in json_reader['data']:
-            CloseApproach.designation = str(row[0])
-            list_ca.append(CloseApproach.designation)
-            CloseApproach.time= row[3]
-            list_ca.append(CloseApproach.time)
-            CloseApproach.distance=float(row[4])
-            list_ca.append(CloseApproach.distance)
-            CloseApproach.velocity=float(row[7])
-            list_ca.append(CloseApproach.velocity)
+            #CloseApproach.designation = str(row[0])
+            #list_ca.append(CloseApproach.designation)
+            #CloseApproach.time= row[3]
+            #list_ca.append(CloseApproach.time)
+            #CloseApproach.distance=float(row[4])
+            #list_ca.append(CloseApproach.distance)
+            #CloseApproach.velocity=float(row[7])
+            #list_ca.append(CloseApproach.velocity)
             
+            ca= CloseApproach(desination=str(row[0]),time= row[3],distance=float(row[4]),velocity=float(row[7]))
+            list_ca.append(ca)
     
     return list_ca
     
