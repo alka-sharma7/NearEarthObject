@@ -46,8 +46,8 @@ class NearEarthObject:
         # and a missing diameter being represented by `float('nan')`.
         self.designation = info.get('designation')
         self.name = info.get('name')
-        self.diameter = info.get('diameter')
-        self.hazardous =info.get('hazardous')   
+        self.diameter = float(info.get('diameter'))
+        self.hazardous =(info.get('hazardous')=='Y')   
         if not self.name:
             self.name = None   
             
@@ -107,8 +107,8 @@ class CloseApproach:
         # You should coerce these values to their appropriate data type and handle any edge cases.
         # The `cd_to_datetime` function will be useful.
         self.time = info.get('time')
-        self.velocity = info.get('velocity')
-        self.distance = info.get('distance')
+        self.velocity = float(info.get('velocity'))
+        self.distance = float(info.get('distance'))
         self.designation = info.get('designation')
         #self.time = None  # TODO: Use the cd_to_datetime function for this attribute.
                                       
